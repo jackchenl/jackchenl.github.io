@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chenlongfe.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.5.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="mysql 登录不进去的问题解决方案：加 sudo 才可以执行 mysql 121 sudo mysql -u root -p2 systemctl restart httpd.service --重启Apache 服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建官网的遇坑集锦">
+<meta property="og:url" content="http://chenlongfe.cn/2021/09/09/%E6%90%AD%E5%BB%BA%E5%AE%98%E7%BD%91%E7%9A%84%E9%81%87%E5%9D%91%E9%9B%86%E9%94%A6/index.html">
+<meta property="og:site_name" content="小陈仔的博客">
+<meta property="og:description" content="mysql 登录不进去的问题解决方案：加 sudo 才可以执行 mysql 121 sudo mysql -u root -p2 systemctl restart httpd.service --重启Apache 服务器">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-09T03:18:55.000Z">
+<meta property="article:modified_time" content="2022-04-17T08:18:13.598Z">
+<meta property="article:author" content="Jack chen">
+<meta property="article:tag" content="程序汪、生活、工作、总结">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://chenlongfe.cn/2021/09/09/%E6%90%AD%E5%BB%BA%E5%AE%98%E7%BD%91%E7%9A%84%E9%81%87%E5%9D%91%E9%9B%86%E9%94%A6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://chenlongfe.cn/2021/09/09/%E6%90%AD%E5%BB%BA%E5%AE%98%E7%BD%91%E7%9A%84%E9%81%87%E5%9D%91%E9%9B%86%E9%94%A6/","path":"2021/09/09/搭建官网的遇坑集锦/","title":"搭建官网的遇坑集锦"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>搭建官网的遇坑集锦 | 小陈仔的博客</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小陈仔的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录一只程序汪的点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql-%E7%99%BB%E5%BD%95%E4%B8%8D%E8%BF%9B%E5%8E%BB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">mysql 登录不进去的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8-liunx-%E7%8E%AF%E5%A2%83%E4%B8%8B%EF%BC%8C%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E6%9D%83%E9%99%90"><span class="nav-number">2.</span> <span class="nav-text">如何在 liunx 环境下，修改文件夹的权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-PHP-%E5%8C%85%EF%BC%8C%E4%BD%BF%E7%94%A8-yum-%E2%80%93-%E6%B3%A8%E6%84%8F%E7%89%88%E6%9C%AC%E5%8F%B7%EF%BC%9A%E5%AE%89%E8%A3%85-%E5%92%8C-php-fpm"><span class="nav-number">3.</span> <span class="nav-text">安装 PHP 包，使用 yum – 注意版本号：安装 和 php-fpm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A3%80%E6%9F%A5%E5%BD%93%E5%89%8D%E5%AE%89%E8%A3%85%E7%9A%84-PHP-%E5%8C%85"><span class="nav-number">3.1.</span> <span class="nav-text">1) 检查当前安装的 PHP 包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%89%E5%A6%82%E6%9E%9C%E6%9C%89%E5%AE%89%E8%A3%85%E7%9A%84-PHP-%E5%8C%85%EF%BC%8C%E9%9C%80%E8%A6%81%E5%85%88%E5%88%A0%E9%99%A4%E5%AE%83%E4%BB%AC"><span class="nav-number">3.2.</span> <span class="nav-text">2）如果有安装的 PHP 包，需要先删除它们</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%BC%89%E6%9B%B4%E6%8D%A2-rpm-%E6%BA%90"><span class="nav-number">3.3.</span> <span class="nav-text">3）更换 rpm 源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%EF%BC%89%E5%A6%82%E6%9E%9C%E6%83%B3%E5%88%A0%E9%99%A4%E4%B8%8A%E9%9D%A2%E5%AE%89%E8%A3%85%E7%9A%84%E5%8C%85-rpm-qa-grep-webstaticrpm-e-%E4%B8%8A%E9%9D%A2%E6%90%9C%E7%B4%A2%E5%88%B0%E7%9A%84%E5%8C%85%E5%8D%B3%E5%8F%AF"><span class="nav-number">3.4.</span> <span class="nav-text">4）如果想删除上面安装的包 rpm -qa | grep webstaticrpm -e 上面搜索到的包即可</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%EF%BC%89%E5%AE%89%E8%A3%85-php7-0"><span class="nav-number">3.5.</span> <span class="nav-text">5）安装 php7.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%EF%BC%89%E5%AE%89%E8%BD%AC-php-fpm"><span class="nav-number">3.6.</span> <span class="nav-text">6）安转 php-fpm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%EF%BC%89%E4%BB%A5%E4%B8%8A%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%EF%BC%8C%E9%9C%80%E8%A6%81%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E6%9D%83%E9%99%90%EF%BC%9A"><span class="nav-number">3.7.</span> <span class="nav-text">7）以上安装完成后，需要更改文件夹的权限：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%8F%82%E8%80%83%EF%BC%9A15"><span class="nav-number">3.8.</span> <span class="nav-text">具体参考：15</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E7%94%9F%E4%BB%A5%E4%B8%8B%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E6%97%B6"><span class="nav-number">4.</span> <span class="nav-text">发生以下错误信息时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BD%E5%B1%8F%E9%97%AE%E9%A2%98-%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">白屏问题 ：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E-liunx-%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">关于 liunx 的一些命令使用：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-linux-%E7%9A%84%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="nav-number">7.</span> <span class="nav-text">查看 linux 的版本号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="nav-number">8.</span> <span class="nav-text">参考：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Ubuntu-%E4%BD%BF%E7%94%A8-Nginx-%E6%90%AD%E5%BB%BA-WordPress"><span class="nav-number">8.1.</span> <span class="nav-text">1. Ubuntu 使用 Nginx 搭建 WordPress</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Install-WordPress-with-Nginx-on-CentOS-7-RHEL-7"><span class="nav-number">8.2.</span> <span class="nav-text">2. Install WordPress with Nginx on CentOS 7 &#x2F; RHEL 7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-How-to-install-WordPress-with-Nginx-on-CentOS-7"><span class="nav-number">8.3.</span> <span class="nav-text">3. How to install WordPress with Nginx on CentOS 7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-How-To-Install-Wordpress-with-nginx-on-Ubuntu-12-04"><span class="nav-number">8.4.</span> <span class="nav-text">4. How To Install Wordpress with nginx on Ubuntu 12.04</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-This-example-is-for-newer-PHP-gt-5-3-3-using-the-included-PHP-FPM-FastCGI-Process-Manager"><span class="nav-number">8.5.</span> <span class="nav-text">5. This example is for newer PHP (&gt;&#x3D; 5.3.3) using the included PHP FPM (FastCGI Process Manager)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Full-Example-Configuration"><span class="nav-number">8.6.</span> <span class="nav-text">6. Full Example Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-mysql-CRUD-command"><span class="nav-number">8.7.</span> <span class="nav-text">7. mysql CRUD command</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-centos-%E4%B8%AD%E7%9A%84%E8%A7%A3%E5%8E%8B%E5%91%BD%E4%BB%A4"><span class="nav-number">8.8.</span> <span class="nav-text">8. centos 中的解压命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E9%98%BF%E9%87%8C%E4%BA%91%E5%AE%89%E8%A3%85-wordpress"><span class="nav-number">8.9.</span> <span class="nav-text">9. 阿里云安装 wordpress</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-%E9%9B%B6%E5%9F%BA%E7%A1%80%E6%95%99%E4%BD%A0%E7%94%A8-WordPress-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99"><span class="nav-number">8.10.</span> <span class="nav-text">10.  零基础教你用 WordPress 搭建个人网站 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-WordPress-%E5%88%87%E6%8D%A2%E5%88%B0-Nginx-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">8.11.</span> <span class="nav-text">11. WordPress 切换到 Nginx 服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-%E6%9F%A5%E7%9C%8B-linux-%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="nav-number">8.12.</span> <span class="nav-text">12. 查看 linux 版本号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-%E4%BF%AE%E6%94%B9-apache-%E7%9A%84%E7%AB%AF%E5%8F%A3%E5%8F%B7-%E4%BD%BF%E7%94%A8-semanage-%E6%9F%A5%E7%9C%8B%E5%B7%B2%E7%BB%8F-listen-%E7%9A%84%E7%AB%AF%E5%8F%A3"><span class="nav-number">8.13.</span> <span class="nav-text">13. 修改 apache 的端口号,使用 semanage 查看已经 listen 的端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-%E6%9F%A5%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="nav-number">8.14.</span> <span class="nav-text">14. 查端口号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-Centos7-%E4%B8%8B-Yum-%E6%9B%B4%E6%96%B0%E5%AE%89%E8%A3%85-PHP5-5-5-6-7-0"><span class="nav-number">8.15.</span> <span class="nav-text">15. Centos7 下 Yum 更新安装 PHP5.5,5.6,7.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-chmod-%E6%AF%8F%E4%B8%AA%E4%BB%A3%E5%8F%B7%E4%BB%A3%E8%A1%A8%E7%9A%84%E6%84%8F%E6%80%9D"><span class="nav-number">8.16.</span> <span class="nav-text">16. chmod 每个代号代表的意思</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-linux-scp-%E8%BF%9C%E7%A8%8B%E6%8B%B7%E8%B4%9D%E6%96%87%E4%BB%B6%E5%87%BA%E7%8E%B0-permission-denied-please-try-again-%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">8.17.</span> <span class="nav-text">17. linux:scp 远程拷贝文件出现 permission denied,please try again 的解决办法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-scp-%E5%87%BA%E7%8E%B0-Permission-denied-please-try-again-%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">8.18.</span> <span class="nav-text">18. scp 出现 Permission denied,please try again 的解决办法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-linux-%E4%B8%8B%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1%E7%A8%8B%E5%BA%8F"><span class="nav-number">8.19.</span> <span class="nav-text">19. linux 下设置开机启动服务程序</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jack chen</p>
+  <div class="site-description" itemprop="description">记录一只程序汪的生活、工作的总结，</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenlongfe.cn/2021/09/09/%E6%90%AD%E5%BB%BA%E5%AE%98%E7%BD%91%E7%9A%84%E9%81%87%E5%9D%91%E9%9B%86%E9%94%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jack chen">
+      <meta itemprop="description" content="记录一只程序汪的生活、工作的总结，">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小陈仔的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          搭建官网的遇坑集锦
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-09 11:18:55" itemprop="dateCreated datePublished" datetime="2021-09-09T11:18:55+08:00">2021-09-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="mysql-登录不进去的问题"><a href="#mysql-登录不进去的问题" class="headerlink" title="mysql 登录不进去的问题"></a>mysql 登录不进去的问题</h2><p>解决方案：加 sudo 才可以执行 mysql</br></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 sudo mysql -u root -p</span><br><span class="line">2 systemctl restart httpd.service --重启Apache 服务器</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="如何在-liunx-环境下，修改文件夹的权限"><a href="#如何在-liunx-环境下，修改文件夹的权限" class="headerlink" title="如何在 liunx 环境下，修改文件夹的权限"></a>如何在 liunx 环境下，修改文件夹的权限</h2><p>加入-R 参数，就可以将读写权限传递给子文件夹，其中 777 意思指读、写、执行权限。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 chmod -R 777 /home/mypackage</span><br></pre></td></tr></table></figure>
+<p>执行完上面命令后，mypackage 文件夹和它下面的所有子文件夹的属性都变成了 777.</p>
+<h2 id="安装-PHP-包，使用-yum-–-注意版本号：安装-和-php-fpm"><a href="#安装-PHP-包，使用-yum-–-注意版本号：安装-和-php-fpm" class="headerlink" title="安装 PHP 包，使用 yum – 注意版本号：安装 和 php-fpm"></a>安装 PHP 包，使用 yum – 注意版本号：安装 和 php-fpm</h2><h3 id="1-检查当前安装的-PHP-包"><a href="#1-检查当前安装的-PHP-包" class="headerlink" title="1) 检查当前安装的 PHP 包"></a>1) 检查当前安装的 PHP 包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list installed | grep php</span><br></pre></td></tr></table></figure>
+<h3 id="2）如果有安装的-PHP-包，需要先删除它们"><a href="#2）如果有安装的-PHP-包，需要先删除它们" class="headerlink" title="2）如果有安装的 PHP 包，需要先删除它们"></a>2）如果有安装的 PHP 包，需要先删除它们</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove php.x86_64 php-cli.x86_64 php-common.x86_64 php-gd.x86_64 php-ldap.x86_64 php-mbstring.x86_64 php-mcrypt.x86_64 php-mysql.x86_64 php-pdo.x86_64</span><br></pre></td></tr></table></figure>
+<h3 id="3）更换-rpm-源"><a href="#3）更换-rpm-源" class="headerlink" title="3）更换 rpm 源"></a>3）更换 rpm 源</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/epel-release.rpm</span><br><span class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</span><br></pre></td></tr></table></figure>
+<h3 id="4）如果想删除上面安装的包-rpm-qa-grep-webstaticrpm-e-上面搜索到的包即可"><a href="#4）如果想删除上面安装的包-rpm-qa-grep-webstaticrpm-e-上面搜索到的包即可" class="headerlink" title="4）如果想删除上面安装的包 rpm -qa | grep webstaticrpm -e 上面搜索到的包即可"></a>4）如果想删除上面安装的包 rpm -qa | grep webstaticrpm -e 上面搜索到的包即可</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install php70w -y</span><br><span class="line">yum install php70w-mysql -y //如果当前找不到安装包时，需要自行切换rpm源</span><br></pre></td></tr></table></figure>
+<h3 id="5）安装-php7-0"><a href="#5）安装-php7-0" class="headerlink" title="5）安装 php7.0"></a>5）安装 php7.0</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum remove php.x86_64 php-cli.x86_64 php-common.x86_64 php-gd.x86_64 php-ldap.x86_64 php</span><br><span class="line">yum install php70w.x86_64 php70w-cli.x86_64 php70w-common.x86_64 php70w-gd.x86_64 php70w</span><br></pre></td></tr></table></figure>
+<h3 id="6）安转-php-fpm"><a href="#6）安转-php-fpm" class="headerlink" title="6）安转 php-fpm"></a>6）安转 php-fpm</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 yum install php70w-fpm</span><br></pre></td></tr></table></figure>
+<h3 id="7）以上安装完成后，需要更改文件夹的权限："><a href="#7）以上安装完成后，需要更改文件夹的权限：" class="headerlink" title="7）以上安装完成后，需要更改文件夹的权限："></a>7）以上安装完成后，需要更改文件夹的权限：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 chown -hR apache /var/www/html</span><br></pre></td></tr></table></figure>
+<h3 id="具体参考：15"><a href="#具体参考：15" class="headerlink" title="具体参考：15"></a>具体参考：15</h3><h2 id="发生以下错误信息时"><a href="#发生以下错误信息时" class="headerlink" title="发生以下错误信息时"></a>发生以下错误信息时</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error message：*86234 connect() to unix:/var/run/php-fpm/www.sock failed (13: Permission denied) while connecting to upstream, client: 10.110.7.181, server: localhost, request: &quot;GET /index.php HTTP/1.1&quot;, upstream: &quot;fastcgi://unix:/var/run/php-fpm/www.sock:&quot;, host: &quot;10.110.254.74&quot;</span><br></pre></td></tr></table></figure>
+<p>使用 vargant 用户 解决 php-fpm 的权限问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tail -f /var/log/nginx/error.log //查看log</span><br><span class="line">tail -f /var/log/nginx/access.log //查看 访问</span><br></pre></td></tr></table></figure>
+<h2 id="白屏问题-："><a href="#白屏问题-：" class="headerlink" title="白屏问题 ："></a>白屏问题 ：</h2><p>在 nginx.conf 中加入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br></pre></td></tr></table></figure>
+<p>修改 /etc/php-fpm.d/<a target="_blank" rel="noopener" href="http://www.conf">www.conf</a> 文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 vim /etc/php/7.1/fpm/php.ini</span><br><span class="line">2 //;cgi.fix_pathinfo=1 改为</span><br><span class="line">3 cgi.fix_pathinfo= 0</span><br></pre></td></tr></table></figure>
+<h2 id="关于-liunx-的一些命令使用："><a href="#关于-liunx-的一些命令使用：" class="headerlink" title="关于 liunx 的一些命令使用："></a>关于 liunx 的一些命令使用：</h2><p>linux 下查看 端口号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lsof -i:端口号</span><br><span class="line">netstat -tunlp|grep 端口号</span><br><span class="line">netstat -nap | grep 1095</span><br><span class="line">kill - 9 1095</span><br></pre></td></tr></table></figure>
+<p>linux 下 查看 端口号<br>1 Run any one of the following command on Linux to see open ports:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo lsof -i -P - n | grep LISTEN</span><br><span class="line">sudo netstat -tulpn | grep LISTEN</span><br><span class="line">sudo lsof -i: 22 ## see a specific port such as 22 ##</span><br><span class="line">sudo nmap -sTU -O IP-address-Here</span><br><span class="line">sudo lsof -i -P - n | grep LISTEN</span><br></pre></td></tr></table></figure>
+<h2 id="查看-linux-的版本号"><a href="#查看-linux-的版本号" class="headerlink" title="查看 linux 的版本号"></a>查看 linux 的版本号</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/version --linux 的内核</span><br><span class="line">cat /etc/redhat-release</span><br></pre></td></tr></table></figure>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><h3 id="1-Ubuntu-使用-Nginx-搭建-WordPress"><a href="#1-Ubuntu-使用-Nginx-搭建-WordPress" class="headerlink" title="1. Ubuntu 使用 Nginx 搭建 WordPress"></a>1. <a target="_blank" rel="noopener" href="https://www.cnblogs.com/tecliu/p/9882472.html">Ubuntu 使用 Nginx 搭建 WordPress</a></h3><h3 id="2-Install-WordPress-with-Nginx-on-CentOS-7-RHEL-7"><a href="#2-Install-WordPress-with-Nginx-on-CentOS-7-RHEL-7" class="headerlink" title="2. Install WordPress with Nginx on CentOS 7 / RHEL 7"></a>2. <a target="_blank" rel="noopener" href="https://www.itzgeek.com/web/wordpress/install-wordpress-with-nginx-1-6-on-centos-7-rhel-7.html">Install WordPress with Nginx on CentOS 7 / RHEL 7</a></h3><h3 id="3-How-to-install-WordPress-with-Nginx-on-CentOS-7"><a href="#3-How-to-install-WordPress-with-Nginx-on-CentOS-7" class="headerlink" title="3. How to install WordPress with Nginx on CentOS 7"></a>3. <a target="_blank" rel="noopener" href="https://linuxize.com/post/how-to-install-wordpress-with-nginx-on-centos-7/">How to install WordPress with Nginx on CentOS 7</a></h3><h3 id="4-How-To-Install-Wordpress-with-nginx-on-Ubuntu-12-04"><a href="#4-How-To-Install-Wordpress-with-nginx-on-Ubuntu-12-04" class="headerlink" title="4. How To Install Wordpress with nginx on Ubuntu 12.04"></a>4. <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-nginx-on-ubuntu-12-04">How To Install Wordpress with nginx on Ubuntu 12.04</a></h3><h3 id="5-This-example-is-for-newer-PHP-gt-5-3-3-using-the-included-PHP-FPM-FastCGI-Process-Manager"><a href="#5-This-example-is-for-newer-PHP-gt-5-3-3-using-the-included-PHP-FPM-FastCGI-Process-Manager" class="headerlink" title="5. This example is for newer PHP (&gt;= 5.3.3) using the included PHP FPM (FastCGI Process Manager)"></a>5. <a target="_blank" rel="noopener" href="https://www.nginx.com/resources/wiki/start/topics/examples/phpfcgi/">This example is for newer PHP (&gt;= 5.3.3) using the included PHP FPM (FastCGI Process Manager)</a></h3><h3 id="6-Full-Example-Configuration"><a href="#6-Full-Example-Configuration" class="headerlink" title="6. Full Example Configuration"></a>6. <a target="_blank" rel="noopener" href="https://www.nginx.com/resources/wiki/start/topics/examples/full/">Full Example Configuration</a></h3><h3 id="7-mysql-CRUD-command"><a href="#7-mysql-CRUD-command" class="headerlink" title="7. mysql CRUD command"></a>7. <a target="_blank" rel="noopener" href="https://www.cnblogs.com/sqbk/p/5806797.html">mysql CRUD command</a></h3><h3 id="8-centos-中的解压命令"><a href="#8-centos-中的解压命令" class="headerlink" title="8. centos 中的解压命令"></a>8. <a target="_blank" rel="noopener" href="https://www.cnblogs.com/ftl1012/p/9255795.html">centos 中的解压命令</a></h3><h3 id="9-阿里云安装-wordpress"><a href="#9-阿里云安装-wordpress" class="headerlink" title="9. 阿里云安装 wordpress"></a>9. <a target="_blank" rel="noopener" href="http://www.cnblogs.com/smyhvae/p/4965163.html">阿里云安装 wordpress</a></h3><h3 id="10-零基础教你用-WordPress-搭建个人网站"><a href="#10-零基础教你用-WordPress-搭建个人网站" class="headerlink" title="10.  零基础教你用 WordPress 搭建个人网站 "></a>10. <strong> <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e017a2ea7991?utm_source=oschina-app">零基础教你用 WordPress 搭建个人网站</a> </strong></h3><h3 id="11-WordPress-切换到-Nginx-服务器"><a href="#11-WordPress-切换到-Nginx-服务器" class="headerlink" title="11. WordPress 切换到 Nginx 服务器"></a>11. <a target="_blank" rel="noopener" href="https://www.williamlong.info/archives/5769.html">WordPress 切换到 Nginx 服务器</a></h3><h3 id="12-查看-linux-版本号"><a href="#12-查看-linux-版本号" class="headerlink" title="12. 查看 linux 版本号"></a>12. <a target="_blank" rel="noopener" href="http://baijiahao.baidu.com/s?id=1601324352730835989&amp;wfr=spider&amp;for=pc">查看 linux 版本号</a></h3><h3 id="13-修改-apache-的端口号-使用-semanage-查看已经-listen-的端口"><a href="#13-修改-apache-的端口号-使用-semanage-查看已经-listen-的端口" class="headerlink" title="13. 修改 apache 的端口号,使用 semanage 查看已经 listen 的端口"></a>13. <a target="_blank" rel="noopener" href="https://www.cnblogs.com/hoby2017/p/9930019.html">修改 apache 的端口号,使用 semanage 查看已经 listen 的端口</a></h3><h3 id="14-查端口号"><a href="#14-查端口号" class="headerlink" title="14. 查端口号"></a>14. <a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangzehuaw/p/8866169.html">查端口号</a></h3><h3 id="15-Centos7-下-Yum-更新安装-PHP5-5-5-6-7-0"><a href="#15-Centos7-下-Yum-更新安装-PHP5-5-5-6-7-0" class="headerlink" title="15. Centos7 下 Yum 更新安装 PHP5.5,5.6,7.0"></a>15. <a target="_blank" rel="noopener" href="https://blog.51cto.com/13718210/2318669">Centos7 下 Yum 更新安装 PHP5.5,5.6,7.0</a></h3><h3 id="16-chmod-每个代号代表的意思"><a href="#16-chmod-每个代号代表的意思" class="headerlink" title="16. chmod 每个代号代表的意思"></a>16. <a target="_blank" rel="noopener" href="https://blog.csdn.net/zhugefubin/article/details/43952393">chmod 每个代号代表的意思</a></h3><h3 id="17-linux-scp-远程拷贝文件出现-permission-denied-please-try-again-的解决办法"><a href="#17-linux-scp-远程拷贝文件出现-permission-denied-please-try-again-的解决办法" class="headerlink" title="17. linux:scp 远程拷贝文件出现 permission denied,please try again 的解决办法"></a>17. <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a8b48260dfdd">linux:scp 远程拷贝文件出现 permission denied,please try again 的解决办法</a></h3><h3 id="18-scp-出现-Permission-denied-please-try-again-的解决办法"><a href="#18-scp-出现-Permission-denied-please-try-again-的解决办法" class="headerlink" title="18. scp 出现 Permission denied,please try again 的解决办法"></a>18. <a target="_blank" rel="noopener" href="https://www.cnblogs.com/xuliangxing/p/7428737.html">scp 出现 Permission denied,please try again 的解决办法</a></h3><h3 id="19-linux-下设置开机启动服务程序"><a href="#19-linux-下设置开机启动服务程序" class="headerlink" title="19. linux 下设置开机启动服务程序"></a>19. <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16743379/article/details/51325587">linux 下设置开机启动服务程序</a></h3>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/05/29/%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%8EReact%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E6%A1%86%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" rel="prev" title="中文输入法与React文本输入框的问题与解决方案">
+                  <i class="fa fa-chevron-left"></i> 中文输入法与React文本输入框的问题与解决方案
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/11/26/%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E6%90%9C%E7%B4%A2%E5%87%BA%E6%9D%A5%E7%9A%84title/" rel="next" title="如何更新搜索引擎搜索出来的网站title">
+                  如何更新搜索引擎搜索出来的网站title <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">苏ICP备18001526号 </a>
+      <img src="/images/beian.png" alt=""><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32092302000118" rel="noopener" target="_blank">苏公网安备 32092302000118号 </a>
+  </div>
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack chen</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
